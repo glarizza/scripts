@@ -8,5 +8,5 @@
 NOW=/private/tmp/now
 THEN=/private/tmp/loggedin
 
-echo `stat -r $NOW | awk -F " " '{print $9}'` - `stat -r $THEN | awk -F " " '{print $9}'` | bc
-
+#echo `stat -r $NOW | awk -F " " '{print $9}'` - `stat -r $THEN | awk -F " " '{print $9}'` | bc
+echo $(( $(stat -r $NOW | awk -F " " '{print $9}') - $(stat -r $THEN | awk -F " " '{print $9}') ))
