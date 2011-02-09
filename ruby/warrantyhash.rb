@@ -12,7 +12,7 @@ def get_warranty_end(serial)
     
     puts "\nMachine serial:\t#{serial}"
     puts "Purchase date:\t#{hash['PURCHASE_DATE']}"
-    puts "Coverage end:\t#{hash['COV_END_DATE']}\n"
+    puts (!hash['COV_END_DATE'].empty?) ? "Coverage end:\t#{hash['COV_END_DATE']}\n" : "Coverage end:\tEXPIRED\n"
   }
 end
 
