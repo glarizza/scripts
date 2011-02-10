@@ -13,5 +13,5 @@ printers = plistlib.readPlistFromString(stdout)
 printers = printers[0]['_items']
 
 for printer in printers:
-  print 'Name: ' + printer['ppd']
-  print 'PPD: ' + printer['_name']
+  print 'Name: ' + printer['_name']
+  print 'PPD: ' + printer['ppd']
