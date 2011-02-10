@@ -10,6 +10,9 @@ if File.exist?("/users/glarizza/Desktop/testhash.txt")
     end
 end
 
+puts hash['this']
+puts hash['test']
+
 #  The contents of /users/glarizza/Desktop/testhash.txt is:
 #
 # test,1
