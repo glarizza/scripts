@@ -18,7 +18,7 @@ pp plist
 
 # This block reads in an existing plist file and outputs data
 #  from the plist file.
-path = File.expand_path("/Users/glarizza/Desktop/com.huronhs.example.plist")
+path = "/Users/glarizza/Desktop/com.huronhs.example.plist"
 second = load_plist(File.read(path))
 pp second['count']
 
