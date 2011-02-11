@@ -22,3 +22,17 @@ path = File.expand_path("/Users/glarizza/Desktop/com.huronhs.example.plist")
 second = load_plist(File.read(path))
 pp second['count']
 
+
+# Contents of com.huronhs.example.plist:
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+# <plist version="1.0">
+# <dict>
+#   <key>The_Color</key>
+#   <string>blue</string>
+#   <key>count</key>
+#   <integer>15</integer>
+# </dict>
+# </plist>
+
