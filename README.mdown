@@ -3,3 +3,15 @@
 This repository is for the miscellaneous scripts that I create which don't
 fit in any other category.  Mainly, I need a place to store and link to 
 these scripts.
+
+##Who Did These?
+
+Scripts are like Pokemon - gotta catch 'em all!  I've picked them up from different forums, lists, tweets, chats, and experimentation.  Many are my own proof-of-concept scripts to test out a process (like exporting a plist or file manipulation).  I refer back to them when I build convenience functions in things like crankd, puppet, log/in,out/ hooks, and things like that.  I still consider myself fairly green (as I don't code regularly) - so it's all about learning and remembering for posterity.
+
+##Can I Borrow/Take one of These?
+
+Sure, that's why I'm posting them.  I think we could all benefit from some shared code.
+
+##There's a Better Way to do <Something>!
+
+Awesome!  Just let me know - I'd love to incorporate it.
