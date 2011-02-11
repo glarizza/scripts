@@ -12,6 +12,6 @@ Scripts are like Pokemon - gotta catch 'em all!  I've picked them up from differ
 
 Sure, that's why I'm posting them.  I think we could all benefit from some shared code.
 
-##There's a Better Way to do <Something>!
+##There's a Better Way to do That!
 
 Awesome!  Just let me know - I'd love to incorporate it.
