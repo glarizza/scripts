@@ -1,0 +1,8 @@
+Awesome way to test --> http://www.rubular.com
+
+(Everything is between the // sticks, by the way.)
+
+Match a quote, then anything in between -->  /"[^"]+"/
+Or again --> \"(.*?)\"
+Match between quotes --> "([^"]*)"
+Match beginning w/ two upper case letters, then anything, then an underscore, then anything --> \"[A-Z][A-Z](.*?)_(.*?)\"
