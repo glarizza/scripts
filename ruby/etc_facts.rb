@@ -14,6 +14,9 @@ module MCollective
               # Variables:
               # =>              fact  => The fact for which we're checking a value
               # =>              value => The value for which we're searching
+              # Calling:
+              # =>              Run the fact with 'mc-rpc --agent etc_facts --action search --arg value=production --arg fact=environment -v'
+              # 
         
               action "search" do
                  validate :value, String
