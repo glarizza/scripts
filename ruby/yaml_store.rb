@@ -9,7 +9,7 @@ module MCollective
                           :license     => "Apache License, Version 2.0",
                           :version     => "1.0",
                           :url         => "http://glarizza.posterous.com",
-                          :timeout     => 60
+                          :timeout     => 3
               
               # Search action:  This action will check for the YAML file of a specified certname or hostname.
               # =>               If the file exists, it will output the contents of the YAML file. If it
@@ -46,10 +46,6 @@ module MCollective
                     reply[:facts] = get_all_facts(searchfield, arg)
                   end
                 end
-                
-                if not (request.include?(:hostname) or request.include?(:certname))
-                  reply[:facts] = puts "You must specify either a hostname or a certname."
-                end
     
               end # Action end
                    
@@ -83,12 +79,12 @@ module MCollective
                   
                   if $found_file
                     if $tempfile[thefact]
-                      return "#{thefact} = #{$tempfile[thefact]}"
+                      puts "#{thefact} = #{$tempfile[thefact]}"
                     else
-                      return "#{thefact} is not a valid fact, or wasn't found."
+                      puts "#{thefact} is not a valid fact, or wasn't found."
                     end
                   else
-                    return "That #{searchfield} was not found."
+                    puts "That #{searchfield} was not found."
                   end
                   
                 end # Def end

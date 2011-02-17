@@ -33,7 +33,7 @@ action "search", :description => "Retrieves Facter facts for specified nodes" do
  	      :validation  => '(.*?)',
           :maxlength   => 230
 
-    output :facts,
+    output 'facts',
           :description => "The Facter facts you want displayed",
           :display_as  => "Fact Information"
 end
