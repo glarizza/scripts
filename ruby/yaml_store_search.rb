@@ -71,10 +71,15 @@ searchfield = 'certname' and arg = $certname if $certname
 #  matching certname or hostname, break out of the loop.
 Dir.glob("#{Puppet[:vardir]}/yaml/facts/*") {|file|
   $tempfile = YAML::load_file(file).values
-  break if $tempfile[searchfield] == arg
+  if $tempfile[searchfield] == arg
+    $found_file = true
+    break
+  end
 }
 
 # Output the list of facts.
-$tempfile.each_pair {|key, value|
-  puts "#{key} = #{value}"
-}
+if $tempfile
+  $tempfile.each_pair {|key, value|
+    puts "#{key} = #{value}"
+  }
+end
