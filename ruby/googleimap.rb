@@ -69,6 +69,7 @@ rescue GetoptLong::InvalidOption, GetoptLong::AmbigousOption
     Display this help text
         
   EOF
+  exit(1)
 end
 
 log = Logger.new("IMAPlog.txt")
