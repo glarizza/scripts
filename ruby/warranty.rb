@@ -12,7 +12,9 @@
 #
 require 'open-uri'
 require 'openssl'
+require 'rubygems'
 require 'json'
+require 'date'
 
 def get_warranty(serial)
   warranty_data = {}
@@ -23,10 +25,14 @@ def get_warranty(serial)
   puts "Product Decription:\t#{warranty_data['PROD_DESCR']}\n"
   puts "Purchase date:\t\t#{warranty_data['PURCHASE_DATE'].gsub("-",".")}"
 
-  unless warranty_data['COV_END_DATE'].empty?
-    puts "Coverage end:\t\t#{warranty_data['COV_END_DATE'].gsub("-",".")}\n"
-  else
+  if warranty_data['COV_END_DATE'].empty? and warranty_data['HW_END_DATE']
+    date = Date.parse(warranty_data['HW_END_DATE'])
+    end_date = date.year.to_s + '.' + date.month.to_s + '.' + date.day.to_s
+    puts "Coverage end:\t\t#{end_date}"
+  elsif warranty_data['COV_END_DATE'].empty?
     puts "Coverage end:\t\tEXPIRED\n"
+  else
+    puts "Coverage end:\t\t#{warranty_data['COV_END_DATE'].gsub("-",".")}\n"
   end
 end
 
