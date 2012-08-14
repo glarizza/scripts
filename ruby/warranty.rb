@@ -7,33 +7,50 @@
 #                 machine serial numbers.
 #
 # Author:         Gary Larizza
-# Last Modified:  1/11/2012
-# Why:            It was ugly
-#
-require 'open-uri'
-require 'openssl'
-require 'rubygems'
-require 'json'
+# Last Modified:  8/13/2012
+# Why:            Apple hates APIs
+require 'uri'
+require 'net/http'
+require 'net/https'
 require 'date'
 
 def get_warranty(serial)
-  warranty_data = {}
-  raw_data = open('https://selfsolve.apple.com/warrantyChecker.do?sn=' + serial.upcase + '&country=USA')
-  warranty_data = JSON.parse(raw_data.string[5..-2])
+  # Setup HTTP connection
+  uri              = URI.parse('https://selfsolve.apple.com/wcResults.do')
+  http             = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl     = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  request          = Net::HTTP::Post.new(uri.request_uri)
 
-  puts "\nSerial Number:\t\t#{warranty_data['SERIAL_ID']}\n"
-  puts "Product Decription:\t#{warranty_data['PROD_DESCR']}\n"
-  puts "Purchase date:\t\t#{warranty_data['PURCHASE_DATE'].gsub("-",".")}"
+  # Prepare POST data
+  request.set_form_data(
+    {
+      'sn'       => serial,
+      'Continue' => 'Continue',
+      'cn'       => '',
+      'locale'   => '',
+      'caller'   => '',
+      'num'      => '0'
+    }
+  )
 
-  if warranty_data['COV_END_DATE'].empty? and warranty_data['HW_END_DATE']
-    date = Date.parse(warranty_data['HW_END_DATE'])
-    end_date = date.year.to_s + '.' + date.month.to_s + '.' + date.day.to_s
-    puts "Coverage end:\t\t#{end_date}"
-  elsif warranty_data['COV_END_DATE'].empty?
-    puts "Coverage end:\t\tEXPIRED\n"
-  else
-    puts "Coverage end:\t\t#{warranty_data['COV_END_DATE'].gsub("-",".")}\n"
-  end
+  # POST data and get the response
+  response      = http.request(request)
+  response_data = response.body
+
+  # I apologize for this line
+  warranty_status = response_data.split('warrantyPage.warrantycheck.displayHWSupportInfo').last.split('Repairs and Service Coverage: ')[1] =~ /^Active/ ? true : false
+
+  # And this one too
+  expiration_date = response_data.split('Estimated Expiration Date: ')[1].split('<')[0] if warranty_status
+
+  puts "\nSerial Number:\t\t#{serial}"
+  puts "Warranty Status:\t" + (warranty_status ? "Active and it expires on #{expiration_date}" : 'Expired')
+
+  #TODO: 
+  #  Grab product description and calculate Purchase Data
+  #  Catch invalid Serial Numbers
+  #  Make this more than just a proof of concept...
 end
 
 if ARGV.size > 0 then
